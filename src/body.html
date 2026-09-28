@@ -388,11 +388,10 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
 
 <script>
 /* ---- Mailing list ----
-   Set SIGNUP_ENDPOINT to your list provider's form endpoint to go live.
-   Buttondown: https://buttondown.com/api/emails/embed-subscribe/<username>
-   Formspree:  https://formspree.io/f/<form-id>
-   Both accept a POST with an "email" field. */
-var SIGNUP_ENDPOINT = '';
+   Emails are stored as responses to a Google Form (linked Sheet optional).
+   SIGNUP_FIELD is the form's "Email" question id (entry.NNN). */
+var SIGNUP_ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSee9nIC0jpcaC4yDqkaunO5GGHHb39ntS5U6e--2d6gVWwpMw/formResponse';
+var SIGNUP_FIELD = 'entry.694557881';
 
 (function(){
   var re=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -405,7 +404,7 @@ var SIGNUP_ENDPOINT = '';
       if(!re.test(email)){note.classList.add('err');note.textContent='That email address doesn’t look right. Check it and try again.';input.focus();return;}
       if(!SIGNUP_ENDPOINT){note.classList.add('err');note.textContent='Signups open when the site goes live. Check back soon.';return;}
       btn.disabled=true;btn.textContent='Adding…';
-      var body=new FormData();body.append('email',email);
+      var body=new URLSearchParams();body.append(SIGNUP_FIELD,email);
       fetch(SIGNUP_ENDPOINT,{method:'POST',body:body,mode:'no-cors'}).then(function(){
         note.classList.add('ok');note.textContent='You’re on the list. We’ll email '+email+' when we launch.';
         input.value='';btn.textContent='Subscribed';

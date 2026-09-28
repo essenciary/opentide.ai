@@ -8,4 +8,4 @@ Static coming-soon site for OpenTide and Tide. No build step: serve the folder a
 - `src/`: source used to generate `index.html`, favicons and the OG image (`python3 src/build.py`)
 
 ## Mailing list
-Set `SIGNUP_ENDPOINT` near the bottom of `index.html` to a Buttondown or Formspree form endpoint. Until then the form validates the email but tells visitors signups aren't open yet.
+The signup form posts to a Google Form (`SIGNUP_ENDPOINT` and `SIGNUP_FIELD` near the bottom of `index.html`). Emails appear under the form's Responses tab; link a Sheet there for a spreadsheet view.
