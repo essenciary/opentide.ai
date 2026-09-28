@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>OpenTide · The web framework for AI agents</title>
+<meta name="description" content="OpenTide is the TypeScript web framework for AI agents. Tide is the IDE reinvented for AI, built on top of it. Coming soon." />
+<link rel="canonical" href="https://opentide.ai/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="OpenTide" />
+<meta property="og:url" content="https://opentide.ai/" />
+<meta property="og:title" content="OpenTide · The web framework for AI agents" />
+<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide and Tide are coming soon." />
+<meta property="og:image" content="https://opentide.ai/img/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://opentide.ai/img/og.png" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#0A1638" />
+<meta name="color-scheme" content="light dark" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+:root{color-scheme:light}
+:root{
+  --navy:#0D1F52; --deep:#0A1638; --ocean:#2F6FC4; --surf:#86CBEA; --foam:#E6F4FA; --amber:#F2A33A;
+  --bg:#F5FAFC; --surface:#FFFFFF; --ink:#0D1F52; --ink-2:#3C4B72; --muted:#6A7797;
+  --line:#D6E4EE; --chip:#E6F4FA; --accent:#2F6FC4; --accent-ink:#FFFFFF; --ok:#1E8A5A;
+  --shadow:0 30px 60px -30px rgba(13,31,82,.45);
+  --font:'Familjen Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#081230; --surface:#0E1B44; --ink:#E6F4FA; --ink-2:#B8C8E2; --muted:#8395BA;
+    --line:#1E2D5E; --chip:#13235A; --accent:#86CBEA; --accent-ink:#081230; --ok:#5BD49B;
+    --shadow:0 30px 60px -30px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#081230; --surface:#0E1B44; --ink:#E6F4FA; --ink-2:#B8C8E2; --muted:#8395BA;
+  --line:#1E2D5E; --chip:#13235A; --accent:#86CBEA; --accent-ink:#081230; --ok:#5BD49B;
+  --shadow:0 30px 60px -30px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:24px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+h1,h2,h3{margin:0;line-height:1.08;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* ---------- Hero (always deep sea) ---------- */
+.hero{position:relative;background:var(--deep);color:#E6F4FA;overflow:hidden;isolation:isolate}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+.brand img{width:36px;height:36px}
+.wordmark{font-size:24px;letter-spacing:-.02em;font-weight:400;line-height:1}
+.wordmark b{font-weight:600}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:15.5px}
+.nav-links a{text-decoration:none;color:#B8C8E2}
+.nav-links a:hover{color:#fff}
+.nav-links .pill{color:var(--deep);background:var(--amber);padding:8px 16px;border-radius:999px;font-weight:600}
+.nav-links .pill:hover{color:var(--deep);background:#F7B85C}
+@media (max-width:640px){.nav-links a:not(.pill){display:none}}
+
+.hero-inner{position:relative;z-index:2;padding-block:56px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:end}
+@media (max-width:900px){.hero-inner{grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}}
+.status{display:inline-flex;align-items:center;gap:10px;color:#86CBEA;margin-bottom:26px}
+.status .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(242,163,58,.6);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,163,58,.55)}70%{box-shadow:0 0 0 10px rgba(242,163,58,0)}100%{box-shadow:0 0 0 0 rgba(242,163,58,0)}}
+@media (prefers-reduced-motion: reduce){.status .dot{animation:none}}
+.hero h1{font-size:clamp(40px,6.2vw,76px);font-weight:600;color:#fff;letter-spacing:-.035em;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--surf)}
+.hero .lede{margin-top:24px;font-size:clamp(17px,1.6vw,20px);color:#B8C8E2;max-width:34em}
+.hero .lede b{color:#fff;font-weight:600}
+
+.pair{display:grid;gap:14px;align-self:center}
+.pair a{display:flex;gap:16px;align-items:center;text-decoration:none;padding:16px 18px;border-radius:18px;background:rgba(134,203,234,.07);border:1px solid rgba(134,203,234,.16);transition:background .2s,border-color .2s}
+.pair a:hover{background:rgba(134,203,234,.13);border-color:rgba(134,203,234,.32)}
+.pair img{width:56px;height:56px;flex:none}
+.pair .n{font-size:21px;font-weight:600;color:#fff;line-height:1.2}
+.pair .n span{font-weight:400}
+.pair .d{font-size:15px;color:#9FB2D6;line-height:1.4}
+.pair .arr{margin-left:auto;color:#86CBEA;font-size:20px}
+
+.hero-form{margin-top:34px;max-width:520px}
+
+/* sea layers at the bottom of the hero */
+.sea{position:relative;z-index:1;margin-top:64px;height:180px}
+.sea svg{position:absolute;inset:auto 0 0 0;width:100%;height:100%}
+.sun{position:absolute;z-index:0;right:max(6vw,32px);bottom:60px;width:min(300px,42vw);aspect-ratio:1;border-radius:50%;border:34px solid var(--amber);opacity:.95}
+@media (max-width:900px){.sun{width:150px;border-width:20px;bottom:40px;right:20px}}
+
+/* hero shot floats over the seam */
+.shot-band{position:relative;z-index:3;margin-top:-120px}
+.window{border-radius:14px;overflow:hidden;background:#fff;box-shadow:var(--shadow);border:1px solid rgba(13,31,82,.12)}
+.window .bar{display:flex;align-items:center;gap:8px;height:34px;padding-inline:14px;background:#EEF3F8;border-bottom:1px solid #DCE5EE}
+.window .bar i{width:11px;height:11px;border-radius:50%;background:#D2DAE5}
+.window .bar span{margin-left:10px;font-family:var(--mono);font-size:12px;color:#6A7797}
+@media (max-width:520px){.shot-band{margin-top:-70px}.sea{height:120px}}
+
+/* ---------- Signup form ---------- */
+.signup{display:flex;gap:8px;padding:6px;border-radius:999px;background:#fff;box-shadow:0 10px 30px -12px rgba(0,0,0,.4)}
+.signup input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:16px;color:#0D1F52;padding:10px 16px;border-radius:999px}
+.signup input::placeholder{color:#7C88A6}
+.signup input:focus{outline:none}
+.signup:focus-within{box-shadow:0 0 0 3px rgba(242,163,58,.55),0 10px 30px -12px rgba(0,0,0,.4)}
+.signup button{border:0;font:inherit;font-weight:600;font-size:15.5px;background:var(--navy);color:#fff;padding:10px 20px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .2s}
+.signup button:hover{background:var(--ocean)}
+.signup button[disabled]{opacity:.6;cursor:progress}
+.form-note{margin-top:12px;font-size:14px;color:#9FB2D6;min-height:1.5em}
+.form-note.ok{color:#9BE3BF}
+.form-note.err{color:#FFB4A1}
+@media (max-width:420px){.signup{flex-direction:column;border-radius:18px}.signup button{padding:12px}}
+
+/* ---------- Sections ---------- */
+section.block{padding-block:112px 40px}
+.block-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;margin-bottom:44px}
+.block-head img{width:84px;height:84px}
+.block-head .eyebrow{color:var(--accent);margin-bottom:8px}
+.block-head h2{font-size:clamp(34px,4.6vw,56px);font-weight:600}
+.block-head h2 span{font-weight:400}
+.tag{font-size:clamp(19px,2vw,24px);color:var(--ink-2);margin-top:6px;letter-spacing:-.01em}
+@media (max-width:560px){.block-head{grid-template-columns:minmax(0,1fr);gap:16px}.block-head img{width:64px;height:64px}}
+.lead{font-size:clamp(18px,1.7vw,21px);color:var(--ink-2);max-width:40em;line-height:1.55}
+.lead b{color:var(--ink);font-weight:600}
+
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 40px;margin-top:52px}
+@media (max-width:900px){.features{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.features{grid-template-columns:minmax(0,1fr);gap:28px}}
+.feature{border-top:1px solid var(--line);padding-top:18px}
+.feature h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.feature h3 .glyph{font-family:var(--mono);font-size:13px;color:var(--amber);font-weight:500}
+.feature p{color:var(--ink-2);font-size:16px;line-height:1.55}
+.feature code,.lead code{font-family:var(--mono);font-size:.86em;background:var(--chip);padding:1px 6px;border-radius:5px;color:var(--ink)}
+
+/* ---------- Mutation pipeline (OpenTide) ---------- */
+.pipeline{margin-top:64px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px;align-items:center}
+@media (max-width:860px){.pipeline{grid-template-columns:minmax(0,1fr);padding:22px}}
+.pipeline .cap .eyebrow{color:var(--muted)}
+.pipeline .cap h3{font-size:24px;font-weight:600;margin:8px 0 10px}
+.pipeline .cap p{color:var(--ink-2);font-size:16px}
+.mut{font-family:var(--mono);font-size:13.5px;line-height:1.7;background:var(--deep);color:#CFE3F5;border-radius:14px;padding:18px 20px;overflow-x:auto;white-space:pre}
+.mut .k{color:#86CBEA}.mut .s{color:#F7C47A}.mut .c{color:#6F84B4}
+.gates{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px;counter-reset:g}
+.gates li{counter-increment:g;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:7px 12px 7px 9px;border-radius:999px;background:var(--chip);color:var(--ink);border:1px solid var(--line)}
+.gates li::before{content:counter(g);font-family:var(--mono);font-size:11.5px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:var(--ok);color:#fff}
+.gates li.commit{background:var(--amber);border-color:var(--amber);color:#0D1F52}
+.gates li.commit::before{background:#0D1F52;color:var(--amber)}
+.gates.run li{animation:gate .5s both}
+@keyframes gate{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.gates.run li{animation:none}}
+.stack{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.stack b{color:var(--ink-2);font-weight:500}
+
+.divider{height:1px;background:var(--line);margin-top:72px}
+
+/* ---------- Gallery (Tide) ---------- */
+.gallery{margin-top:56px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:thin}
+.tabs button{flex:none;font:inherit;font-size:14.5px;font-weight:500;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:all .15s}
+.tabs button:hover{color:var(--ink);border-color:var(--accent)}
+.tabs button[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+:root[data-theme="dark"] .tabs button[aria-selected="true"]{background:var(--surf);border-color:var(--surf);color:#081230}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:var(--surf);border-color:var(--surf);color:#081230}}
+.stage{margin-top:14px;position:relative}
+.stage .window{cursor:zoom-in}
+.stage .frame{aspect-ratio:3/2;background:#F4F6F9;overflow:hidden}
+.stage .frame img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.caption{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline}
+.caption .t{font-size:19px;font-weight:600}
+.caption .t span{font-weight:400;color:var(--ink-2)}
+.caption .hint{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.nav-arrows{position:absolute;top:50%;left:-8px;right:-8px;display:flex;justify-content:space-between;pointer-events:none;transform:translateY(-50%)}
+.nav-arrows button{pointer-events:auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(13,31,82,.4)}
+@media (max-width:560px){.nav-arrows{display:none}}
+
+/* ---------- Coming soon ---------- */
+.soon{margin-top:120px;background:var(--deep);color:#E6F4FA;position:relative;overflow:hidden}
+.soon .wrap{position:relative;z-index:2;padding-block:96px 150px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+@media (max-width:860px){.soon .wrap{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:72px 130px}}
+.soon h2{font-size:clamp(34px,4.6vw,56px);font-weight:600;color:#fff}
+.soon p{color:#B8C8E2;margin-top:14px;font-size:18px;max-width:30em}
+.soon .eyebrow{color:var(--amber);margin-bottom:14px}
+.soon .sea2{position:absolute;inset:auto 0 0 0;height:110px;z-index:1}
+.soon .sea2 svg{width:100%;height:100%;display:block}
+
+footer{background:#0D1F52;color:#9FB2D6;font-size:14.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;padding-block:26px}
+footer a{color:#E6F4FA;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .links{display:flex;gap:22px;flex-wrap:wrap}
+
+/* ---------- Lightbox ---------- */
+.lb[hidden],[hidden]{display:none!important}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(6,12,32,.9);display:flex;align-items:center;justify-content:center;padding:max(24px,env(safe-area-inset-top,0px)) 16px max(24px,env(safe-area-inset-bottom,0px));overflow:auto}
+.lb img{max-height:100%;width:auto;max-width:min(1600px,100%);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5);margin:auto}
+.lb button{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#0D1F52;font-size:20px;cursor:pointer}
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="#top" id="top" aria-label="OpenTide home">
+        <img src="img/opentide-mark.svg" alt="" width="36" height="36" />
+        <span class="wordmark">Open<b>Tide</b></span>
+      </a>
+      <div class="nav-links">
+        <a href="#opentide">OpenTide</a>
+        <a href="#tide">Tide</a>
+        <a class="pill" href="#notify">Get notified</a>
+      </div>
+    </nav>
+
+    <div class="hero-inner">
+      <div>
+        <div class="status eyebrow"><span class="dot" aria-hidden="true"></span>Coming soon</div>
+        <h1>Build apps with AI agents, <em>one verified change</em> at a time.</h1>
+        <p class="lede"><b>OpenTide</b> is the TypeScript web framework for AI agents. <b>Tide</b> is the IDE reinvented for AI, built on top of it. Agents work on your live, running app through gated tools, and every change is checked before it commits.</p>
+        <div class="hero-form">
+          <form class="signup" data-signup novalidate>
+            <label for="email-hero" class="sr" style="position:absolute;left:-9999px">Email address</label>
+            <input id="email-hero" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+            <button type="submit">Notify me</button>
+          </form>
+          <p class="form-note" aria-live="polite">One email when we launch. No spam.</p>
+        </div>
+      </div>
+      <div class="pair">
+        <a href="#opentide">
+          <img src="img/opentide-mark.svg" alt="OpenTide logo" width="56" height="56" />
+          <div><div class="n"><span>Open</span>Tide</div><div class="d">The web framework for AI agents</div></div>
+          <span class="arr" aria-hidden="true">↓</span>
+        </a>
+        <a href="#tide">
+          <img src="img/tide-mark.svg" alt="Tide logo" width="56" height="56" />
+          <div><div class="n">Tide</div><div class="d">The IDE reinvented for AI</div></div>
+          <span class="arr" aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sun" aria-hidden="true"></div>
+  <div class="sea" aria-hidden="true">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+      <path d="M0 58 C 180 78, 330 70, 520 44 C 700 20, 880 10, 1080 30 C 1240 46, 1350 52, 1440 40 L1440 180 L0 180Z" fill="#86CBEA"/>
+      <path d="M0 96 C 200 84, 360 74, 560 80 C 760 86, 900 104, 1100 98 C 1250 94, 1360 82, 1440 76 L1440 180 L0 180Z" fill="#2F6FC4"/>
+      <path d="M0 108 C 200 96, 360 88, 560 94 C 760 100, 900 118, 1100 112 C 1250 108, 1360 96, 1440 90 L1440 180 L0 180Z" fill="#0D1F52"/>
+      <path d="M0 140 C 240 128, 420 124, 640 132 C 860 140, 1040 150, 1240 144 C 1330 141, 1400 136, 1440 132 L1440 180 L0 180Z" style="fill:var(--bg)"/>
+    </svg>
+  </div>
+</header>
+
+<div class="shot-band">
+  <div class="wrap">
+    <div class="window">
+      <div class="bar"><i></i><i></i><i></i><span>Tide · agent session</span></div>
+      <picture><source media="(max-width:600px)" srcset="img/tide/tide-detail.webp" /><img src="img/tide/tide.webp" alt="Tide: the agent explains why and how for each change, next to the full change history" width="2400" height="1507" /></picture>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- ================= OpenTide ================= -->
+  <section class="block" id="opentide" aria-labelledby="ot-h">
+    <div class="wrap">
+      <div class="block-head">
+        <img src="img/opentide-mark.svg" alt="OpenTide logo" width="84" height="84" />
+        <div>
+          <div class="eyebrow">The framework</div>
+          <h2 id="ot-h"><span>Open</span>Tide</h2>
+          <p class="tag">The TypeScript web framework for AI agents.</p>
+        </div>
+      </div>
+      <p class="lead">During development, your app runs as a long-lived process inside the OpenTide kernel. Agents don't read and rewrite files. They <b>inspect and change the running app</b> through MCP tools that encode the kernel's rules, so every change follows the same discipline, whichever model makes it.</p>
+
+      <div class="features">
+        <div class="feature"><h3><span class="glyph">01</span>Gated access</h3><p>Agents only touch the app through MCP tools. The tools decide what a valid change looks like, not the prompt.</p></div>
+        <div class="feature"><h3><span class="glyph">02</span>The running app is the source</h3><p>No code files to generate or keep in sync during development. The live process is the canonical artifact, persisted with state snapshots. When you ship, export it as a Deno app, a Node app or a standalone binary.</p></div>
+        <div class="feature"><h3><span class="glyph">03</span>Typed mutations</h3><p>Your app lives as a typed program graph. Every edit lands as a serializable mutation, like <code>AddNode</code> or <code>ReplaceBody</code>, written to an append-only log.</p></div>
+        <div class="feature"><h3><span class="glyph">04</span>Verified before commit</h3><p>Each mutation is checked for well-formedness, graph consistency, effect constraints and contracts, then forked, verified and committed atomically.</p></div>
+        <div class="feature"><h3><span class="glyph">05</span>History you can roll back</h3><p>The log event-sources how the app evolved. Inspect any change, see why it was made, and roll it back.</p></div>
+        <div class="feature"><h3><span class="glyph">06</span>Token-efficient</h3><p>Agents work on precise app entities instead of reading whole codebases, so the context window goes to the task.</p></div>
+      </div>
+
+      <div class="pipeline">
+        <div class="cap">
+          <div class="eyebrow">Apply pipeline</div>
+          <h3>Every change earns its commit</h3>
+          <p>A mutation only lands if it passes every gate. The kernel's apply, commit and rollback semantics are formally specified.</p>
+        </div>
+        <div>
+<div class="mut" role="img" aria-label="Example mutation: ReplaceBody on the fetchWeather function"><span class="c">// proposed by the agent</span>
+{ <span class="k">op</span>: <span class="s">"ReplaceBody"</span>,
+  <span class="k">node</span>: <span class="s">"fn:fetchWeather"</span>,
+  <span class="k">why</span>: <span class="s">"Return a Result instead of throwing"</span>,
+  <span class="k">effects</span>: [<span class="s">"net:open-meteo"</span>] }</div>
+          <ol class="gates" id="gates">
+            <li>Well-formed</li>
+            <li>Graph consistent</li>
+            <li>Effects allowed</li>
+            <li>Contracts hold</li>
+            <li>Fork &amp; verify</li>
+            <li class="commit">Atomic commit</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="stack"><b>Built with</b><span>Deno</span><span>TypeScript</span><span>Hono</span><span>PGlite</span><span>MCP</span></div>
+      <div class="stack" style="margin-top:10px"><b>Exports to</b><span>Deno app</span><span>Node app</span><span>Standalone binary</span></div>
+      <div class="divider"></div>
+    </div>
+  </section>
+
+  <!-- ================= Tide ================= -->
+  <section class="block" id="tide" aria-labelledby="tide-h" style="padding-top:72px">
+    <div class="wrap">
+      <div class="block-head">
+        <img src="img/tide-mark.svg" alt="Tide logo" width="84" height="84" />
+        <div>
+          <div class="eyebrow">The IDE</div>
+          <h2 id="tide-h">Tide</h2>
+          <p class="tag">The IDE reinvented for AI.</p>
+        </div>
+      </div>
+      <p class="lead">Chat with an agent on one side, your running app on the other. <b>Plan with acceptance criteria, build against the live app</b>, and see every change verified before it counts as done. You direct the work. The agent writes the code.</p>
+
+      <div class="features">
+        <div class="feature"><h3><span class="glyph">&gt;_</span>Agent-first</h3><p>Every change comes with its why and its approach, so you can review intent as well as the diff.</p></div>
+        <div class="feature"><h3><span class="glyph">&gt;_</span>The live app, in view</h3><p>Preview the running app next to its request logs, and explore a live call graph of what is actually running.</p></div>
+        <div class="feature"><h3><span class="glyph">&gt;_</span>Verification built in</h3><p>Changesets are checked against their acceptance criteria before they close. Readiness blockers tell you what's missing.</p></div>
+        <div class="feature"><h3><span class="glyph">&gt;_</span>Tests and audits</h3><p>The test suite runs inside the kernel. Audits cover accessibility, code quality, performance, security and SEO.</p></div>
+        <div class="feature"><h3><span class="glyph">&gt;_</span>A model for each job</h3><p>Pick different models for the agent, planning, import and verification, and keep an eye on tokens and cost per session.</p></div>
+        <div class="feature"><h3><span class="glyph">&gt;_</span>Docs, search and Git</h3><p>Generated documentation next to the source, search across everything, then commit and push when you're ready.</p></div>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <div class="tabs" role="tablist" aria-label="Tide screenshots" id="tabs"></div>
+        <div class="stage">
+          <div class="window" id="stage-win" role="button" tabindex="0" aria-label="Open screenshot full size">
+            <div class="bar"><i></i><i></i><i></i><span id="stage-bar">Tide</span></div>
+            <div class="frame"><img id="stage-img" src="img/tide/tide-2-detail.webp" alt="" width="1200" height="800" /></div>
+          </div>
+          <div class="nav-arrows">
+            <button type="button" id="prev" aria-label="Previous screenshot">←</button>
+            <button type="button" id="next" aria-label="Next screenshot">→</button>
+          </div>
+        </div>
+        <div class="caption"><div class="t" id="stage-cap"></div><div class="hint" id="stage-count"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Coming soon ================= -->
+  <section class="soon" id="notify" aria-labelledby="soon-h">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Coming soon</div>
+        <h2 id="soon-h">The tide is coming in.</h2>
+        <p>OpenTide and Tide are in active development. Leave your email and we'll let you know when the first release is out.</p>
+      </div>
+      <div>
+        <form class="signup" data-signup novalidate>
+          <label for="email-soon" style="position:absolute;left:-9999px">Email address</label>
+          <input id="email-soon" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+          <button type="submit">Notify me</button>
+        </form>
+        <p class="form-note" aria-live="polite">One email when we launch. No spam.</p>
+      </div>
+    </div>
+    <div class="sea2" aria-hidden="true">
+      <svg viewBox="0 0 1440 110" preserveAspectRatio="none">
+        <path d="M0 40 C 220 58, 420 50, 640 30 C 860 12, 1060 8, 1260 24 C 1340 30, 1400 34, 1440 32 L1440 110 L0 110Z" fill="#86CBEA"/>
+        <path d="M0 70 C 240 58, 440 52, 660 58 C 880 64, 1040 80, 1240 74 C 1330 71, 1400 64, 1440 60 L1440 110 L0 110Z" fill="#2F6FC4"/>
+        <path d="M0 82 C 240 70, 440 64, 660 70 C 880 76, 1040 92, 1240 86 C 1330 83, 1400 76, 1440 72 L1440 110 L0 110Z" fill="#0D1F52"/>
+      </svg>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 OpenTide.ai · Built by <a href="https://essenciary.com" target="_blank" rel="noopener">Adrian Salceanu</a></div>
+    <div class="links">
+      <a href="#opentide">OpenTide</a>
+      <a href="#tide">Tide</a>
+      <a href="#notify">Get notified</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden>
+  <button type="button" id="lb-close" aria-label="Close">✕</button>
+  <img id="lb-img" alt="" />
+</div>
+
+<script>
+/* ---- Mailing list ----
+   Set SIGNUP_ENDPOINT to your list provider's form endpoint to go live.
+   Buttondown: https://buttondown.com/api/emails/embed-subscribe/<username>
+   Formspree:  https://formspree.io/f/<form-id>
+   Both accept a POST with an "email" field. */
+var SIGNUP_ENDPOINT = '';
+
+(function(){
+  var re=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  document.querySelectorAll('form[data-signup]').forEach(function(form){
+    var input=form.querySelector('input'), btn=form.querySelector('button'), note=form.parentNode.querySelector('.form-note');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var email=(input.value||'').trim();
+      note.className='form-note';
+      if(!re.test(email)){note.classList.add('err');note.textContent='That email address doesn’t look right. Check it and try again.';input.focus();return;}
+      if(!SIGNUP_ENDPOINT){note.classList.add('err');note.textContent='Signups open when the site goes live. Check back soon.';return;}
+      btn.disabled=true;btn.textContent='Adding…';
+      var body=new FormData();body.append('email',email);
+      fetch(SIGNUP_ENDPOINT,{method:'POST',body:body,mode:'no-cors'}).then(function(){
+        note.classList.add('ok');note.textContent='You’re on the list. We’ll email '+email+' when we launch.';
+        input.value='';btn.textContent='Subscribed';
+      }).catch(function(){
+        note.classList.add('err');note.textContent='We couldn’t reach the signup service. Try again in a moment.';
+        btn.disabled=false;btn.textContent='Notify me';
+      });
+    });
+  });
+})();
+
+/* ---- Screenshot gallery ---- */
+(function(){
+  var shots=[
+    ['Agent','every change comes with its why and approach','tide'],
+    ['Diagram','a live call graph of the running app','tide-2'],
+    ['Preview','the running app next to its live request logs','tide-3'],
+    ['Verification','every changeset checked before it counts as done','tide-4'],
+    ['Docs & code','generated documentation next to the source','tide-5'],
+    ['Search & Git','find anything, then commit and push','tide-6'],
+    ['Tests','the app’s test suite, run inside the kernel','tide-7'],
+    ['Audits','accessibility, code quality, performance, security, SEO','tide-8'],
+    ['Tools','38 built-in tools the agent works with','tide-9'],
+    ['REPL','evaluate code inside the running kernel','tide-10'],
+    ['Settings','a model for each job: agent, planning, import, verification','tide-11']
+  ];
+  var tabs=document.getElementById('tabs'), img=document.getElementById('stage-img'),
+      cap=document.getElementById('stage-cap'), cnt=document.getElementById('stage-count'),
+      bar=document.getElementById('stage-bar'), win=document.getElementById('stage-win'), i=1;
+  shots.forEach(function(s,n){
+    var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.id='tab-'+n;b.textContent=s[0];
+    b.addEventListener('click',function(){show(n)});tabs.appendChild(b);
+    var pre=new Image();pre.src='img/tide/'+s[2]+'-detail.webp';
+  });
+  function show(n){
+    i=(n+shots.length)%shots.length;var s=shots[i];
+    img.src='img/tide/'+s[2]+'-detail.webp';img.alt='Tide '+s[0]+': '+s[1];
+    cap.innerHTML='';var b=document.createElement('span');cap.textContent=s[0]+' ';b.textContent='· '+s[1];cap.appendChild(b);
+    bar.textContent='Tide · '+s[0];
+    cnt.textContent=String(i+1).padStart(2,'0')+' / '+shots.length+'  ·  click to enlarge';
+    tabs.querySelectorAll('button').forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false')});
+    var t=tabs.children[i];if(t){tabs.scrollTo({left:t.offsetLeft-tabs.offsetLeft-24,behavior:'smooth'})}
+  }
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  var lb=document.getElementById('lb'), lbi=document.getElementById('lb-img');
+  function open(){lbi.src='img/tide/'+shots[i][2]+'.webp';lbi.alt=img.alt;lb.hidden=false;document.getElementById('lb-close').focus()}
+  function close(){lb.hidden=true;win.focus()}
+  win.addEventListener('click',open);
+  win.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+  lb.addEventListener('click',function(e){if(e.target!==lbi)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lb.hidden&&e.key==='Escape')close();
+    if(lb.hidden&&document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#gallery')){
+      if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1);
+    }
+  });
+  show(1);
+
+  /* Pipeline: replay the gate sequence once when it scrolls into view (resting state is fully visible). */
+  var g=document.getElementById('gates');
+  if(g&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    g.querySelectorAll('li').forEach(function(li,k){li.style.animationDelay=(k*0.14)+'s'});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){g.classList.add('run');io.disconnect()}})},{threshold:.6});
+    io.observe(g);
+  }
+})();
+</script>
+
+</body>
+</html>
