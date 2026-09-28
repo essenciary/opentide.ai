@@ -270,9 +270,12 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
         <div class="feature"><h3><span class="glyph">01</span>Gated access</h3><p>Your code lives as a semantic graph, exposed to agents through MCP tools. Agents query exactly the nodes they need, and the OpenTide kernel decides what a valid change looks like, not the prompt.</p></div>
         <div class="feature"><h3><span class="glyph">02</span>The running app is the source</h3><p>No code files to generate or keep in sync during development. The live process is the canonical artifact, persisted with state snapshots. When you ship, export it as a Deno app, a Node app, a standalone binary or a Docker image.</p></div>
         <div class="feature"><h3><span class="glyph">03</span>Typed mutations</h3><p>The graph is typed. Every edit lands as a serializable mutation to it, like <code>AddNode</code> or <code>ReplaceBody</code>, written to an append-only log.</p></div>
-        <div class="feature"><h3><span class="glyph">04</span>Verified before commit</h3><p>Each mutation is checked for well-formedness, graph consistency, effect constraints and contracts, then forked, verified and committed atomically.</p></div>
+        <div class="feature"><h3><span class="glyph">04</span>Verified before commit</h3><p>Each mutation is checked for well-formedness, graph consistency, effect constraints and contracts, then forked, verified and committed atomically. The kernel mints tamper-resistant evidence for every check, and a change with stale or missing evidence can’t close.</p></div>
         <div class="feature"><h3><span class="glyph">05</span>History you can roll back</h3><p>The log event-sources how the app evolved. Inspect any change, see why it was made, and roll it back.</p></div>
         <div class="feature"><h3><span class="glyph">06</span>Token-efficient</h3><p>Agents work on precise app entities instead of reading whole codebases, so the context window goes to the task.</p></div>
+        <div class="feature"><h3><span class="glyph">07</span>Bring your own agent</h3><p>OpenTide runs as an MCP server. Point Claude Code, Codex or Cursor at your project over stdio or HTTP, and they get the same governed tools as the IDE.</p></div>
+        <div class="feature"><h3><span class="glyph">08</span>Live changes, no restarts</h3><p>Agent edits land in the running kernel, get recompiled and re-served immediately. You iterate on the running app, not a source tree.</p></div>
+        <div class="feature"><h3><span class="glyph">09</span>Headless and model-neutral</h3><p><code>opentide serve</code>, <code>mcp</code>, <code>scaffold</code>, <code>build</code> and <code>export</code> from the terminal. The core runs without an LLM key and without a login.</p></div>
       </div>
 
       <div class="pipeline">
@@ -298,7 +301,7 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
         </div>
       </div>
 
-      <div class="stack"><b>Built with</b><span>Deno</span><span>TypeScript</span><span>Hono</span><span>PGlite</span><span>MCP</span></div>
+      <div class="stack"><b>Built with</b><span>Deno</span><span>TypeScript</span><span>Hono</span><span>PGlite</span><span>Postgres</span><span>MCP</span></div>
       <div class="stack" style="margin-top:10px"><b>Exports to</b><span>Deno app</span><span>Node app</span><span>Standalone binary</span><span>Docker image</span></div>
       <div class="divider"></div>
     </div>
