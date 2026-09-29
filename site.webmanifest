@@ -1,7 +1,7 @@
 {
   "name": "OpenTide",
   "short_name": "OpenTide",
-  "description": "The web framework for AI agents.",
+  "description": "The agent-native web framework.",
   "start_url": "/",
   "display": "browser",
   "background_color": "#0A1638",

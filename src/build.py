@@ -7,8 +7,8 @@ head='''<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>OpenTide &amp; Tide · The web framework and IDE for AI agents</title>
-<meta name="description" content="OpenTide is the web framework for AI agents: your app runs live, agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon." />
+<title>OpenTide &amp; Tide · The agent-native web framework and IDE</title>
+<meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon." />
 <meta name="keywords" content="OpenTide, Tide, AI agents, web framework, AI IDE, MCP, Model Context Protocol, TypeScript, Deno, agentic coding, verified code changes" />
 <meta name="author" content="Adrian Salceanu" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -17,16 +17,16 @@ head='''<!doctype html>
 <meta property="og:site_name" content="OpenTide" />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:url" content="https://opentide.ai/" />
-<meta property="og:title" content="OpenTide · The web framework for AI agents" />
-<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the web framework for AI agents; Tide is the IDE reinvented for AI. Coming soon." />
+<meta property="og:title" content="OpenTide · The agent-native web framework" />
+<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the agent-native web framework; Tide is the IDE reinvented for AI. Coming soon." />
 <meta property="og:image" content="https://opentide.ai/img/og.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="OpenTide · The web framework for AI agents" />
-<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the web framework for AI agents; Tide is the IDE reinvented for AI. Coming soon." />
+<meta name="twitter:title" content="OpenTide · The agent-native web framework" />
+<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the agent-native web framework; Tide is the IDE reinvented for AI. Coming soon." />
 <meta name="twitter:image" content="https://opentide.ai/img/og.png" />
 <meta name="twitter:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -54,7 +54,7 @@ head='''<!doctype html>
       "@id": "https://opentide.ai/#website",
       "url": "https://opentide.ai/",
       "name": "OpenTide",
-      "description": "OpenTide is the web framework for AI agents: your app runs live, agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon.",
+      "description": "OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon.",
       "publisher": { "@id": "https://opentide.ai/#org" },
       "inLanguage": "en"
     },
@@ -64,7 +64,7 @@ head='''<!doctype html>
       "url": "https://opentide.ai/#opentide",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "macOS, Linux, Windows",
-      "description": "The web framework for AI agents. Agents change a live, running app through gated MCP tools; every change is a typed mutation, verified before it commits and kept in an append-only log.",
+      "description": "The agent-native web framework. AI agents change a live, running app through gated MCP tools; every change is a typed mutation, verified before it commits and kept in an append-only log.",
       "programmingLanguage": "TypeScript",
       "publisher": { "@id": "https://opentide.ai/#org" }
     },
@@ -110,5 +110,5 @@ open('sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset x
 cairosvg.svg2png(bytestring=mark.encode(),write_to='img/opentide-logo-512.png',output_width=512,output_height=512)
 cairosvg.svg2png(bytestring=mark.encode(),write_to='icon-192.png',output_width=192,output_height=192)
 import json
-open('site.webmanifest','w').write(json.dumps({"name":"OpenTide","short_name":"OpenTide","description":"The web framework for AI agents.","start_url":"/","display":"browser","background_color":"#0A1638","theme_color":"#0A1638","icons":[{"src":"/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"/img/opentide-logo-512.png","sizes":"512x512","type":"image/png"}]},indent=2)+'\n')
+open('site.webmanifest','w').write(json.dumps({"name":"OpenTide","short_name":"OpenTide","description":"The agent-native web framework.","start_url":"/","display":"browser","background_color":"#0A1638","theme_color":"#0A1638","icons":[{"src":"/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"/img/opentide-logo-512.png","sizes":"512x512","type":"image/png"}]},indent=2)+'\n')
 print('built')
