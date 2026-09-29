@@ -131,6 +131,11 @@ section.block{padding-block:72px 40px}
 .pipeline .cap p{color:var(--ink-2);font-size:16px}
 .mut{font-family:var(--mono);font-size:13.5px;line-height:1.7;background:var(--deep);color:#CFE3F5;border-radius:14px;padding:18px 20px;overflow-x:auto;white-space:pre}
 .mut .k{color:#86CBEA}.mut .s{color:#F7C47A}.mut .c{color:#6F84B4}
+.mut .ln{display:inline-block;min-width:100%;margin-inline:-8px;padding-inline:8px;border-radius:4px;transition:background .25s}
+.mut .ln.hl{background:rgba(242,163,58,.18)}
+.mut .rule{display:block;height:1px;background:rgba(134,203,234,.18);margin:10px 0 8px}
+.mut .ok{color:#6FE0A6}
+#mut-out{white-space:pre}
 .gates{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .gates button{display:flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:500;padding:7px 12px 7px 9px;border-radius:999px;background:var(--chip);color:var(--ink);border:1px solid var(--line);cursor:pointer;transition:border-color .15s,box-shadow .15s,background .2s}
 .gates button:hover{border-color:var(--accent)}
@@ -290,11 +295,14 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
           <p>A mutation only lands if it passes every gate. The kernel's apply, commit and rollback semantics are formally specified.</p>
         </div>
         <div>
-<div class="mut" role="img" aria-label="Example mutation: ReplaceBody on the fetchWeather function"><span class="c">// proposed by the agent</span>
-{ <span class="k">op</span>: <span class="s">"ReplaceBody"</span>,
-  <span class="k">node</span>: <span class="s">"fn:fetchWeather"</span>,
-  <span class="k">why</span>: <span class="s">"Return a Result instead of throwing"</span>,
-  <span class="k">effects</span>: [<span class="s">"net:open-meteo"</span>] }</div>
+<div class="mut" id="mut" aria-live="polite"><span class="c">// proposed by the agent</span>
+<span class="ln" data-l="op">{ <span class="k">op</span>: <span class="s">"ReplaceBody"</span>,</span>
+<span class="ln" data-l="node">  <span class="k">node</span>: <span class="s">"fn:fetchWeather"</span>,</span>
+<span class="ln" data-l="why">  <span class="k">why</span>: <span class="s">"Return a Result instead of throwing"</span>,</span>
+<span class="ln" data-l="effects">  <span class="k">effects</span>: [<span class="s">"net:open-meteo"</span>] }</span>
+<span class="rule"></span><span class="c">// kernel</span>
+<span id="mut-out"><span class="ok">✓ commit</span>  mutation #1284 appended, live app updated
+  fn:fetchWeather rev 7 → 8</span></div>
           <ol class="gates" id="gates" aria-label="Apply pipeline gates">
             <li><button type="button" class="done"><span class="n">1</span>Well-formed</button></li>
             <li><button type="button" class="done"><span class="n">2</span>Graph consistent</button></li>
@@ -484,7 +492,19 @@ var SIGNUP_FIELD = 'entry.694557881';
     ['Fork & verify','The change is applied to a fork of the running app and verified there, while the live app keeps serving.'],
     ['Atomic commit','Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.']
   ];
+  var gout=[
+    ['well-formed','ReplaceBody on fn:fetchWeather\n  new body parses, 0 type errors',['op','node']],
+    ['graph','3 references still resolve\n  GET /api/weather, analyzeDirections, getDirections',['node']],
+    ['effects','net:open-meteo is an allowed effect\n  no undeclared effects found',['effects']],
+    ['contracts','returns Result<Weather>, never throws\n  all declared contracts hold',['why']],
+    ['fork','applied to fork f-a41c and verified\n  live app kept serving',[]],
+    ['commit','mutation #1284 appended, live app updated\n  fn:fetchWeather rev 7 \u2192 8',[]]
+  ];
+  var mout=document.getElementById('mut-out'), mlines=[].slice.call(document.querySelectorAll('#mut .ln'));
   function pick(k,upto){
+    var o=gout[k];mout.innerHTML='';var ok=document.createElement('span');ok.className='ok';ok.textContent='\u2713 '+o[0];
+    mout.appendChild(ok);mout.appendChild(document.createTextNode('  '+o[1]));
+    mlines.forEach(function(l){l.classList.toggle('hl',o[2].indexOf(l.getAttribute('data-l'))>-1)});
     gates.forEach(function(b,j){b.setAttribute('aria-pressed',j===k?'true':'false');b.classList.toggle('done',j<=(upto==null?5:upto))});
     gtext.innerHTML='';var t=document.createElement('b');t.textContent=(k+1)+' \u00b7 '+gdesc[k][0]+'. ';gtext.appendChild(t);gtext.appendChild(document.createTextNode(gdesc[k][1]));
   }
