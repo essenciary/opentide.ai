@@ -210,14 +210,17 @@ section.block{padding-block:72px 40px}
 .pipeline .cap p{color:var(--ink-2);font-size:16px}
 .mut{font-family:var(--mono);font-size:13.5px;line-height:1.7;background:var(--deep);color:#CFE3F5;border-radius:14px;padding:18px 20px;overflow-x:auto;white-space:pre}
 .mut .k{color:#86CBEA}.mut .s{color:#F7C47A}.mut .c{color:#6F84B4}
-.gates{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px;counter-reset:g}
-.gates li{counter-increment:g;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:7px 12px 7px 9px;border-radius:999px;background:var(--chip);color:var(--ink);border:1px solid var(--line)}
-.gates li::before{content:counter(g);font-family:var(--mono);font-size:11.5px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:var(--ok);color:#fff}
-.gates li.commit{background:var(--amber);border-color:var(--amber);color:#0D1F52}
-.gates li.commit::before{background:#0D1F52;color:var(--amber)}
-.gates.run li{animation:gate .5s both}
-@keyframes gate{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion: reduce){.gates.run li{animation:none}}
+.gates{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.gates button{display:flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:500;padding:7px 12px 7px 9px;border-radius:999px;background:var(--chip);color:var(--ink);border:1px solid var(--line);cursor:pointer;transition:border-color .15s,box-shadow .15s,background .2s}
+.gates button:hover{border-color:var(--accent)}
+.gates .n{font-family:var(--mono);font-size:11.5px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:var(--line);color:var(--ink-2);transition:background .25s,color .25s}
+.gates button.done .n{background:var(--ok);color:#fff}
+.gates button[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--chip),0 0 0 3px var(--ink)}
+.gates button.commit.done{background:var(--amber);border-color:var(--amber);color:#0D1F52}
+.gates button.commit.done .n{background:#0D1F52;color:var(--amber)}
+.gate-detail{margin-top:14px;display:flex;gap:14px;align-items:flex-start;justify-content:space-between;background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--ink-2);min-height:4.4em}
+.gate-detail b{color:var(--ink);font-weight:600}
+.gate-detail button{flex:none;font:inherit;font-family:var(--mono);font-size:12px;color:var(--accent);background:none;border:0;cursor:pointer;padding:2px 0;text-decoration:underline;text-underline-offset:3px}
 .stack{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:13px;color:var(--muted)}
 .stack b{color:var(--ink-2);font-weight:500}
 
@@ -233,8 +236,10 @@ section.block{padding-block:72px 40px}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:var(--surf);border-color:var(--surf);color:#081230}}
 .stage{margin-top:14px;position:relative}
 .stage .window{cursor:zoom-in}
-.stage .frame{aspect-ratio:3/2;background:#F4F6F9;overflow:hidden}
-.stage .frame img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.stage .frame{aspect-ratio:16/10;background:#EEF2F6;overflow:hidden}
+.stage .frame picture,.stage .frame img{width:100%;height:100%;display:block}
+.stage .frame img{object-fit:contain;object-position:center top}
+@media (max-width:760px){.stage .frame{aspect-ratio:3/2}.stage .frame img{object-fit:cover;object-position:top left}}
 .caption{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline}
 .caption .t{font-size:19px;font-weight:600}
 .caption .t span{font-weight:400;color:var(--ink-2)}
@@ -371,14 +376,15 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
   <span class="k">node</span>: <span class="s">"fn:fetchWeather"</span>,
   <span class="k">why</span>: <span class="s">"Return a Result instead of throwing"</span>,
   <span class="k">effects</span>: [<span class="s">"net:open-meteo"</span>] }</div>
-          <ol class="gates" id="gates">
-            <li>Well-formed</li>
-            <li>Graph consistent</li>
-            <li>Effects allowed</li>
-            <li>Contracts hold</li>
-            <li>Fork &amp; verify</li>
-            <li class="commit">Atomic commit</li>
+          <ol class="gates" id="gates" aria-label="Apply pipeline gates">
+            <li><button type="button" class="done"><span class="n">1</span>Well-formed</button></li>
+            <li><button type="button" class="done"><span class="n">2</span>Graph consistent</button></li>
+            <li><button type="button" class="done"><span class="n">3</span>Effects allowed</button></li>
+            <li><button type="button" class="done"><span class="n">4</span>Contracts hold</button></li>
+            <li><button type="button" class="done"><span class="n">5</span>Fork &amp; verify</button></li>
+            <li><button type="button" class="done commit" aria-pressed="true"><span class="n">6</span>Atomic commit</button></li>
           </ol>
+          <div class="gate-detail" aria-live="polite"><p id="gate-text"><b>6 · Atomic commit.</b> Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.</p><button type="button" id="gate-replay">Replay</button></div>
         </div>
       </div>
 
@@ -415,7 +421,7 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
         <div class="stage">
           <div class="window" id="stage-win" role="button" tabindex="0" aria-label="Open screenshot full size">
             <div class="bar"><i></i><i></i><i></i><span id="stage-bar">Tide</span></div>
-            <div class="frame"><img id="stage-img" src="img/tide/tide-2-detail.webp" alt="" width="1200" height="800" /></div>
+            <div class="frame"><picture><source id="stage-src" media="(min-width:761px)" srcset="img/tide/tide-2.webp" /><img id="stage-img" src="img/tide/tide-2-detail.webp" alt="" width="2400" height="1481" /></picture></div>
           </div>
           <div class="nav-arrows">
             <button type="button" id="prev" aria-label="Previous screenshot">←</button>
@@ -517,15 +523,16 @@ var SIGNUP_FIELD = 'entry.694557881';
   ];
   var tabs=document.getElementById('tabs'), img=document.getElementById('stage-img'),
       cap=document.getElementById('stage-cap'), cnt=document.getElementById('stage-count'),
-      bar=document.getElementById('stage-bar'), win=document.getElementById('stage-win'), i=1;
+      bar=document.getElementById('stage-bar'), win=document.getElementById('stage-win'), src=document.getElementById('stage-src'), i=1,
+      wide=matchMedia('(min-width:761px)');
   shots.forEach(function(s,n){
     var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.id='tab-'+n;b.textContent=s[0];
     b.addEventListener('click',function(){show(n)});tabs.appendChild(b);
-    var pre=new Image();pre.src='img/tide/'+s[2]+'-detail.webp';
+    if(n<3){var pre=new Image();pre.src='img/tide/'+s[2]+(wide.matches?'':'-detail')+'.webp';}
   });
   function show(n){
     i=(n+shots.length)%shots.length;var s=shots[i];
-    img.src='img/tide/'+s[2]+'-detail.webp';img.alt='Tide '+s[0]+': '+s[1];
+    src.srcset='img/tide/'+s[2]+'.webp';img.src='img/tide/'+s[2]+'-detail.webp';img.alt='Tide '+s[0]+': '+s[1];
     cap.innerHTML='';var b=document.createElement('span');cap.textContent=s[0]+' ';b.textContent='· '+s[1];cap.appendChild(b);
     bar.textContent='Tide · '+s[0];
     cnt.textContent=String(i+1).padStart(2,'0')+' / '+shots.length+'  ·  click to enlarge';
@@ -548,11 +555,30 @@ var SIGNUP_FIELD = 'entry.694557881';
   });
   show(1);
 
-  /* Pipeline: replay the gate sequence once when it scrolls into view (resting state is fully visible). */
+  /* Pipeline: click a gate to read what it checks; plays through once when scrolled into view. */
+  var gates=[].slice.call(document.querySelectorAll('#gates button')), gtext=document.getElementById('gate-text'), timer=null;
+  var gdesc=[
+    ['Well-formed','The mutation is complete and valid for the kind of node it targets. Here, the new body of fetchWeather parses and type-checks.'],
+    ['Graph consistent','Every reference still resolves after the change: the routes and functions that call fetchWeather, and the types it returns.'],
+    ['Effects allowed','The mutation declares its side effects, here a network call to open-meteo, and the kernel checks them against what the project allows.'],
+    ['Contracts hold','The contracts declared on the node still hold with the new body.'],
+    ['Fork & verify','The change is applied to a fork of the running app and verified there, while the live app keeps serving.'],
+    ['Atomic commit','Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.']
+  ];
+  function pick(k,upto){
+    gates.forEach(function(b,j){b.setAttribute('aria-pressed',j===k?'true':'false');b.classList.toggle('done',j<=(upto==null?5:upto))});
+    gtext.innerHTML='';var t=document.createElement('b');t.textContent=(k+1)+' \u00b7 '+gdesc[k][0]+'. ';gtext.appendChild(t);gtext.appendChild(document.createTextNode(gdesc[k][1]));
+  }
+  function stop(){if(timer){clearInterval(timer);timer=null}}
+  function play(){
+    stop();var k=0;pick(0,0);
+    timer=setInterval(function(){k++;if(k>5){stop();return}pick(k,k)},1300);
+  }
+  gates.forEach(function(b,k){b.addEventListener('click',function(){stop();pick(k)})});
+  document.getElementById('gate-replay').addEventListener('click',play);
   var g=document.getElementById('gates');
   if(g&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
-    g.querySelectorAll('li').forEach(function(li,k){li.style.animationDelay=(k*0.14)+'s'});
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){g.classList.add('run');io.disconnect()}})},{threshold:.6});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){play();io.disconnect()}})},{threshold:.6});
     io.observe(g);
   }
 })();
