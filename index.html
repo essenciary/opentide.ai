@@ -225,7 +225,6 @@ section.block{padding-block:72px 40px}
 .gates button.commit.done .n{background:#0D1F52;color:var(--amber)}
 .gate-detail{margin-top:14px;display:flex;gap:14px;align-items:flex-start;justify-content:space-between;background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--ink-2);min-height:4.4em}
 .gate-detail b{color:var(--ink);font-weight:600}
-.gate-detail button{flex:none;font:inherit;font-family:var(--mono);font-size:12px;color:var(--accent);background:none;border:0;cursor:pointer;padding:2px 0;text-decoration:underline;text-underline-offset:3px}
 .stack{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:13px;color:var(--muted)}
 .stack b{color:var(--ink-2);font-weight:500}
 
@@ -392,7 +391,7 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
             <li><button type="button" class="done"><span class="n">5</span>Fork &amp; verify</button></li>
             <li><button type="button" class="done commit" aria-pressed="true"><span class="n">6</span>Atomic commit</button></li>
           </ol>
-          <div class="gate-detail" aria-live="polite"><p id="gate-text"><b>6 · Atomic commit.</b> Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.</p><button type="button" id="gate-replay">Replay</button></div>
+          <div class="gate-detail" aria-live="polite"><p id="gate-text"><b>6 · Atomic commit.</b> Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.</p></div>
         </div>
       </div>
 
@@ -586,7 +585,7 @@ var SIGNUP_FIELD = 'entry.694557881';
     var o=gout[k];mout.innerHTML='';var ok=document.createElement('span');ok.className='ok';ok.textContent='\u2713 '+o[0];
     mout.appendChild(ok);mout.appendChild(document.createTextNode('  '+o[1]));
     mlines.forEach(function(l){l.classList.toggle('hl',o[2].indexOf(l.getAttribute('data-l'))>-1)});
-    gates.forEach(function(b,j){b.setAttribute('aria-pressed',j===k?'true':'false');b.classList.toggle('done',j<=(upto==null?5:upto))});
+    gates.forEach(function(b,j){b.setAttribute('aria-pressed',j===k?'true':'false');b.classList.toggle('done',j<=upto)});
     gtext.innerHTML='';var t=document.createElement('b');t.textContent=(k+1)+' \u00b7 '+gdesc[k][0]+'. ';gtext.appendChild(t);gtext.appendChild(document.createTextNode(gdesc[k][1]));
   }
   function stop(){if(timer){clearInterval(timer);timer=null}}
@@ -594,8 +593,7 @@ var SIGNUP_FIELD = 'entry.694557881';
     stop();var k=0;pick(0,0);
     timer=setInterval(function(){k++;if(k>5){stop();return}pick(k,k)},1300);
   }
-  gates.forEach(function(b,k){b.addEventListener('click',function(){stop();pick(k)})});
-  document.getElementById('gate-replay').addEventListener('click',play);
+  gates.forEach(function(b,k){b.addEventListener('click',function(){stop();pick(k,k)})});
   var g=document.getElementById('gates');
   if(g&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){play();io.disconnect()}})},{threshold:.6});
