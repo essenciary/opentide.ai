@@ -9,7 +9,7 @@ head='''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>OpenTide &amp; Tide · The agent-native web framework and IDE</title>
 <meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Open source (Apache-2.0); connect Claude Code, Codex, Cursor or any MCP agent. Tide, the IDE reinvented for AI, is coming soon." />
-<meta name="keywords" content="OpenTide, Tide, AI agents, web framework, AI IDE, MCP, Model Context Protocol, TypeScript, Deno, agentic coding, verified code changes" />
+<meta name="keywords" content="OpenTide, Tide, AI agents, web framework, AI IDE, MCP, Model Context Protocol, TypeScript, agentic coding, verified code changes" />
 <meta name="author" content="Adrian Salceanu" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href="https://opentide.ai/" />
@@ -71,7 +71,7 @@ head='''<!doctype html>
       "installUrl": "https://github.com/opentideai/opentide#quick-start",
       "sameAs": "https://github.com/opentideai/opentide",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "description": "The agent-native web framework. AI agents change a live, running app through gated MCP tools; every change is a typed mutation, verified before it commits and kept in an append-only log.",
+      "description": "The agent-native web framework. AI agents change a live, running app through gated MCP tools; every change runs in a changeset that can’t complete until tests the server ran back every acceptance criterion.",
       "programmingLanguage": "TypeScript",
       "publisher": { "@id": "https://opentide.ai/#org" }
     },

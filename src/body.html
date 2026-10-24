@@ -137,7 +137,7 @@ section.block{padding-block:72px 40px}
 .feature p{color:var(--ink-2);font-size:16px;line-height:1.55}
 .feature code,.lead code{font-family:var(--mono);font-size:.86em;background:var(--chip);padding:1px 6px;border-radius:5px;color:var(--ink)}
 
-/* ---------- Mutation pipeline (OpenTide) ---------- */
+/* ---------- Changeset lifecycle (OpenTide) ---------- */
 .pipeline{margin-top:64px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:24px}
 @media (max-width:860px){.pipeline{padding:22px}}
 .pipeline .cap{max-width:44em}
@@ -296,43 +296,44 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
       <div class="features">
         <div class="feature"><h3><span class="glyph">01</span>Gated access</h3><p>Your code lives as a semantic graph, exposed to agents through MCP tools. Agents query exactly the nodes they need, and the OpenTide kernel decides what a valid change looks like, not the prompt.</p></div>
         <div class="feature"><h3><span class="glyph">02</span>The running app is the source</h3><p>No code files to generate or keep in sync during development. The live process is the canonical artifact, persisted with state snapshots. When you ship, one command exports a plain Node app you can deploy anywhere Node runs.</p></div>
-        <div class="feature"><h3><span class="glyph">03</span>Typed mutations</h3><p>The graph is typed. Every edit lands as a serializable mutation to it, like <code>AddNode</code> or <code>ReplaceBody</code>, written to an append-only log. Because mutations are plain data, you can inspect, diff and replay them, and every entity carries its own revision number.</p></div>
-        <div class="feature"><h3><span class="glyph">04</span>Verified before commit</h3><p>Each mutation is checked for well-formedness, graph consistency, effect constraints and contracts, then forked, verified and committed atomically. The kernel mints tamper-resistant evidence for every check, and a change with stale or missing evidence can’t close.</p></div>
-        <div class="feature"><h3><span class="glyph">05</span>History you can roll back</h3><p>The log event-sources how the app evolved. Inspect any change, see why it was made, and roll it back. Changes are grouped into changesets tied to the agent turn that made them, and snapshots restore the whole app to any saved point.</p></div>
+        <div class="feature"><h3><span class="glyph">03</span>Checked on every define</h3><p>Agents build with 109 MCP tools like <code>define_handler</code>, <code>register_route</code>, <code>define_schema</code> and <code>define_test</code>. Every define is compiled and quality-checked (esbuild, lint) before it’s accepted. Each entity carries a revision number, and <code>expectedRevision</code> turns a stale write into an error instead of an overwrite.</p></div>
+        <div class="feature"><h3><span class="glyph">04</span>Done means proven</h3><p>Work happens in changesets: a plan with steps, acceptance criteria and a verification plan. <code>complete_changeset</code> refuses until every criterion has evidence, and the evidence must cite attestations the server minted when it ran <code>run_tests</code>, <code>check_export_types</code> or <code>verify_formal_specs</code>. Edit the code afterwards and they go stale.</p></div>
+        <div class="feature"><h3><span class="glyph">05</span>History you can roll back</h3><p>Every edit is recorded in a changelog with its rationale, searchable with <code>search_changes</code> and <code>get_change</code>. <code>undo_change</code> and <code>undo_turn</code> step back one change or a whole agent turn. Abandoning a changeset rewinds code, schema and files while app data stays, and <code>take_snapshot</code> / <code>restore_snapshot</code> cover the whole app.</p></div>
         <div class="feature"><h3><span class="glyph">06</span>Token-efficient</h3><p>Agents work on precise app entities instead of reading whole codebases, so the context window goes to the task. Tools return structured answers, like a route’s handler, a table’s columns or a function’s callers, instead of raw file dumps.</p></div>
-        <div class="feature"><h3><span class="glyph">07</span>Bring your own agent</h3><p>OpenTide runs as an MCP server. Point Claude Code, Codex, Cursor, Windsurf or any MCP client at your project, and it gets 109 governed tools.</p></div>
+        <div class="feature"><h3><span class="glyph">07</span>Bring your own agent</h3><p>OpenTide runs as an MCP server. Point Claude Code, Codex, Cursor, Windsurf or any MCP client at your project. Any number can connect, one writes at a time: <code>start_task</code> forks the project for a parallel agent, and <code>merge_task</code> replays the fork under main’s tests and refuses on conflicts.</p></div>
         <div class="feature"><h3><span class="glyph">08</span>Live changes, no restarts</h3><p>Agent edits land in the running kernel, get recompiled and re-served immediately. You iterate on the running app, not a source tree.</p></div>
         <div class="feature"><h3><span class="glyph">09</span>Headless and model-neutral</h3><p><code>opentide serve</code>, <code>mcp</code>, <code>scaffold</code>, <code>build</code> and <code>export</code> from the terminal. The core runs without an LLM key and without a login.</p></div>
       </div>
 
       <div class="pipeline">
         <div class="cap">
-          <div class="eyebrow">Apply pipeline</div>
+          <div class="eyebrow">Changeset lifecycle</div>
           <h3>Every change earns its commit</h3>
-          <p>A mutation only lands if it passes every gate. The kernel's apply, commit and rollback semantics are formally specified.</p>
+          <p>Agents work in changesets. A changeset can’t complete until every acceptance criterion is backed by evidence the server recorded itself, and the finished work lands in files you commit.</p>
         </div>
         <div class="body">
-          <ol class="gates" id="gates" aria-label="Apply pipeline gates">
-            <li><button type="button" class="done"><span class="n">1</span>Well-formed</button></li>
-            <li><button type="button" class="done"><span class="n">2</span>Graph consistent</button></li>
-            <li><button type="button" class="done"><span class="n">3</span>Effects allowed</button></li>
-            <li><button type="button" class="done"><span class="n">4</span>Contracts hold</button></li>
-            <li><button type="button" class="done"><span class="n">5</span>Fork &amp; verify</button></li>
-            <li><button type="button" class="done" aria-pressed="true"><span class="n">6</span>Atomic commit</button></li>
+          <ol class="gates" id="gates" aria-label="Changeset lifecycle steps">
+            <li><button type="button" class="done"><span class="n">1</span>Plan</button></li>
+            <li><button type="button" class="done"><span class="n">2</span>Build live</button></li>
+            <li><button type="button" class="done"><span class="n">3</span>Test</button></li>
+            <li><button type="button" class="done"><span class="n">4</span>Attest</button></li>
+            <li><button type="button" class="done"><span class="n">5</span>Readiness gate</button></li>
+            <li><button type="button" class="done" aria-pressed="true"><span class="n">6</span>Complete</button></li>
           </ol>
-<div class="mut" id="mut" aria-live="polite"><span class="c">// proposed by the agent</span>
-<span class="ln" data-l="op">{ <span class="k">op</span>: <span class="s">"ReplaceBody"</span>,</span>
-<span class="ln" data-l="node">  <span class="k">node</span>: <span class="s">"fn:fetchWeather"</span>,</span>
-<span class="ln" data-l="why">  <span class="k">why</span>: <span class="s">"Return a Result instead of throwing"</span>,</span>
-<span class="ln" data-l="effects">  <span class="k">effects</span>: [<span class="s">"net:open-meteo"</span>] }</span>
-<span class="rule"></span><span class="c">// kernel</span>
-<span id="mut-out"><span class="ok">✓ commit</span>  mutation #1284 appended, live app updated
-  fn:fetchWeather rev 7 → 8</span></div>
-          <div class="gate-detail" aria-live="polite"><p id="gate-text"><b>6 · Atomic commit.</b> Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.</p></div>
+<div class="mut" id="mut" aria-live="polite"><span class="c">// agent → opentide, over MCP</span>
+<span class="ln" data-l="plan"><span class="k">create_changeset</span>({ title: <span class="s">"Todos API"</span>, plan: { steps, acceptanceCriteria, verificationPlan } })</span>
+<span class="ln" data-l="build"><span class="k">define_handler</span>({ name: <span class="s">"createTodo"</span>, source, module: <span class="s">"todos"</span> })</span>
+<span class="ln" data-l="test"><span class="k">run_tests</span>({ pattern: <span class="s">"test_todo*"</span> })</span>
+<span class="ln" data-l="attest"><span class="k">record_verification_run</span>({ changeset_id, evidence: [{ attestationId }], claimResults })</span>
+<span class="ln" data-l="complete"><span class="k">complete_changeset</span>({ changeset_id })</span>
+<span class="rule"></span><span class="c">// server</span>
+<span id="mut-out"><span class="ok">✓ completed</span>  stateFlushed: true
+  written to .opentide/state/, ready to commit</span></div>
+          <div class="gate-detail" aria-live="polite"><p id="gate-text"><b>6 · Complete.</b> Once the gate passes, the changeset completes and the work is flushed to <code>.opentide/state/</code>, plain files you commit. <code>stateFlushed: true</code> confirms it.</p></div>
         </div>
       </div>
 
-      <div class="stack"><b>Built with</b><span>Deno</span><span>TypeScript</span><span>Hono</span><span>PGlite</span><span>Postgres</span><span>MCP</span></div>
+      <div class="stack"><b>Built with</b><span>TypeScript</span><span>Hono</span><span>PGlite</span><span>Postgres</span><span>MCP</span></div>
       <div class="stack" style="margin-top:10px"><b>Exports to</b><span>Node app</span><b style="margin-left:14px">License</b><span>Apache-2.0</span><b style="margin-left:14px">Runs on</b><span>macOS</span><span>Linux</span><span>Windows (WSL)</span></div>
       <div class="get">
         <div>
@@ -497,20 +498,20 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
   /* Pipeline: click a gate to read what it checks; plays through once when scrolled into view. */
   var gates=[].slice.call(document.querySelectorAll('#gates button')), gtext=document.getElementById('gate-text'), timer=null;
   var gdesc=[
-    ['Well-formed','The mutation is complete and valid for the kind of node it targets. Here, the new body of fetchWeather parses and type-checks.'],
-    ['Graph consistent','Every reference still resolves after the change: the routes and functions that call fetchWeather, and the types it returns.'],
-    ['Effects allowed','The mutation declares its side effects, here a network call to open-meteo, and the kernel checks them against what the project allows.'],
-    ['Contracts hold','The contracts declared on the node still hold with the new body.'],
-    ['Fork & verify','The change is applied to a fork of the running app and verified there, while the live app keeps serving.'],
-    ['Atomic commit','Only after every gate passes is the mutation appended to the log and swapped into the live app in one step. If anything fails, nothing changes.']
+    ['Plan','The agent opens a changeset with create_changeset: a plan with steps, acceptance criteria, and a verification plan that maps checks to those criteria.'],
+    ['Build live','It builds through tools like define_handler, register_route and define_schema. Each define is compiled and quality-checked (esbuild, lint) before it\u2019s accepted, then serves straight away. expectedRevision rejects writes based on a stale read.'],
+    ['Test','run_tests runs the app\u2019s tests inside the server. The server records the result and mints an attestation id. check_export_types and verify_formal_specs do the same for the type check and for type-level invariants on the app\u2019s own code, like exhaustive switches.'],
+    ['Attest','record_verification_run ties each acceptance criterion to evidence, and test, type-check and invariant evidence must cite an attestation id. Attestations are server-recorded and fingerprinted against the code, not cryptographically signed.'],
+    ['Readiness gate','complete_changeset checks readiness first. It refuses while any criterion lacks evidence, or cites an attestation that went stale because the code changed after the run. The gate can run advisory, graduated or strict.'],
+    ['Complete','Once the gate passes, the changeset completes and the work is flushed to .opentide/state/, plain files you commit. stateFlushed: true confirms it.']
   ];
   var gout=[
-    ['well-formed','ReplaceBody on fn:fetchWeather\n  new body parses, 0 type errors',['op','node']],
-    ['graph','3 references still resolve\n  GET /api/weather, analyzeDirections, getDirections',['node']],
-    ['effects','net:open-meteo is an allowed effect\n  no undeclared effects found',['effects']],
-    ['contracts','returns Result<Weather>, never throws\n  all declared contracts hold',['why']],
-    ['fork','applied to fork f-a41c and verified\n  live app kept serving',[]],
-    ['commit','mutation #1284 appended, live app updated\n  fn:fetchWeather rev 7 \u2192 8',[]]
+    ['planned','cs_mh4q2\u2026  3 steps, 3 acceptance criteria\n  verification plan maps 2 checks to the criteria',['plan']],
+    ['defined','createTodo rev 1, serving now\n  compiled and lint-checked before it was accepted',['build']],
+    ['tests','6 passed, 0 failed\n  attestationId att_mh4q9\u2026 minted by the server',['test']],
+    ['recorded','3/3 criteria cite evidence\n  att_mh4q9\u2026 fingerprint matches the current code',['attest']],
+    ['ready','every criterion backed by fresh evidence\n  edit createTodo now and att_mh4q9\u2026 goes stale',['complete']],
+    ['completed','stateFlushed: true\n  written to .opentide/state/, ready to commit',['complete']]
   ];
   var mout=document.getElementById('mut-out'), mlines=[].slice.call(document.querySelectorAll('#mut .ln'));
   function pick(k,upto){
