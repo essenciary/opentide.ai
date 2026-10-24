@@ -8,7 +8,7 @@ head='''<!doctype html>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>OpenTide &amp; Tide · The agent-native web framework and IDE</title>
-<meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon." />
+<meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Open source (Apache-2.0); connect Claude Code, Codex, Cursor or any MCP agent. Tide, the IDE reinvented for AI, is coming soon." />
 <meta name="keywords" content="OpenTide, Tide, AI agents, web framework, AI IDE, MCP, Model Context Protocol, TypeScript, Deno, agentic coding, verified code changes" />
 <meta name="author" content="Adrian Salceanu" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -18,7 +18,7 @@ head='''<!doctype html>
 <meta property="og:locale" content="en_GB" />
 <meta property="og:url" content="https://opentide.ai/" />
 <meta property="og:title" content="OpenTide · The agent-native web framework" />
-<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the agent-native web framework; Tide is the IDE reinvented for AI. Coming soon." />
+<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide, the agent-native web framework, is out and open source. Tide, the IDE, is coming soon." />
 <meta property="og:image" content="https://opentide.ai/img/og.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
@@ -26,7 +26,7 @@ head='''<!doctype html>
 <meta property="og:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="OpenTide · The agent-native web framework" />
-<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the agent-native web framework; Tide is the IDE reinvented for AI. Coming soon." />
+<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide, the agent-native web framework, is out and open source. Tide, the IDE, is coming soon." />
 <meta name="twitter:image" content="https://opentide.ai/img/og.png" />
 <meta name="twitter:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -47,14 +47,15 @@ head='''<!doctype html>
       "name": "OpenTide",
       "url": "https://opentide.ai/",
       "logo": "https://opentide.ai/img/opentide-logo-512.png",
-      "founder": { "@type": "Person", "name": "Adrian Salceanu", "url": "https://essenciary.com/" }
+      "founder": { "@type": "Person", "name": "Adrian Salceanu", "url": "https://essenciary.com/" },
+      "sameAs": ["https://github.com/opentideai"]
     },
     {
       "@type": "WebSite",
       "@id": "https://opentide.ai/#website",
       "url": "https://opentide.ai/",
       "name": "OpenTide",
-      "description": "OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon.",
+      "description": "OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide, the IDE reinvented for AI, is coming soon.",
       "publisher": { "@id": "https://opentide.ai/#org" },
       "inLanguage": "en"
     },
@@ -63,7 +64,13 @@ head='''<!doctype html>
       "name": "OpenTide",
       "url": "https://opentide.ai/#opentide",
       "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "macOS, Linux, Windows",
+      "operatingSystem": "macOS, Linux",
+      "softwareVersion": "0.1",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "downloadUrl": "https://github.com/opentideai/opentide/releases/latest",
+      "installUrl": "https://github.com/opentideai/opentide#quick-start",
+      "sameAs": "https://github.com/opentideai/opentide",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "description": "The agent-native web framework. AI agents change a live, running app through gated MCP tools; every change is a typed mutation, verified before it commits and kept in an append-only log.",
       "programmingLanguage": "TypeScript",
       "publisher": { "@id": "https://opentide.ai/#org" }
@@ -100,7 +107,7 @@ og=f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox
 <text x="232" y="170" font-family="Familjen Grotesk" font-size="64" fill="#fff"><tspan font-weight="400">Open</tspan><tspan font-weight="600">Tide</tspan></text>
 <text x="80" y="300" font-family="Familjen Grotesk" font-weight="600" font-size="58" fill="#fff" letter-spacing="-1.5">Build apps with AI agents,</text>
 <text x="80" y="368" font-family="Familjen Grotesk" font-weight="600" font-size="58" fill="#86CBEA" letter-spacing="-1.5">one verified change at a time.</text>
-<text x="80" y="420" font-family="Familjen Grotesk" font-size="26" fill="#B8C8E2">OpenTide + Tide · Coming soon · opentide.ai</text>
+<text x="80" y="420" font-family="Familjen Grotesk" font-size="26" fill="#B8C8E2">OpenTide 0.1 · Open source · github.com/opentideai/opentide</text>
 </svg>'''
 cairosvg.svg2png(bytestring=og.encode(),write_to='img/og.png')
 open('CNAME','w').write('opentide.ai\n')

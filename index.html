@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>OpenTide &amp; Tide · The agent-native web framework and IDE</title>
-<meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon." />
+<meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Open source (Apache-2.0); connect Claude Code, Codex, Cursor or any MCP agent. Tide, the IDE reinvented for AI, is coming soon." />
 <meta name="keywords" content="OpenTide, Tide, AI agents, web framework, AI IDE, MCP, Model Context Protocol, TypeScript, Deno, agentic coding, verified code changes" />
 <meta name="author" content="Adrian Salceanu" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -14,7 +14,7 @@
 <meta property="og:locale" content="en_GB" />
 <meta property="og:url" content="https://opentide.ai/" />
 <meta property="og:title" content="OpenTide · The agent-native web framework" />
-<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the agent-native web framework; Tide is the IDE reinvented for AI. Coming soon." />
+<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide, the agent-native web framework, is out and open source. Tide, the IDE, is coming soon." />
 <meta property="og:image" content="https://opentide.ai/img/og.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
@@ -22,7 +22,7 @@
 <meta property="og:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="OpenTide · The agent-native web framework" />
-<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide is the agent-native web framework; Tide is the IDE reinvented for AI. Coming soon." />
+<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide, the agent-native web framework, is out and open source. Tide, the IDE, is coming soon." />
 <meta name="twitter:image" content="https://opentide.ai/img/og.png" />
 <meta name="twitter:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -43,14 +43,15 @@
       "name": "OpenTide",
       "url": "https://opentide.ai/",
       "logo": "https://opentide.ai/img/opentide-logo-512.png",
-      "founder": { "@type": "Person", "name": "Adrian Salceanu", "url": "https://essenciary.com/" }
+      "founder": { "@type": "Person", "name": "Adrian Salceanu", "url": "https://essenciary.com/" },
+      "sameAs": ["https://github.com/opentideai"]
     },
     {
       "@type": "WebSite",
       "@id": "https://opentide.ai/#website",
       "url": "https://opentide.ai/",
       "name": "OpenTide",
-      "description": "OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide is the IDE reinvented for AI, built on top of it. Coming soon.",
+      "description": "OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Tide, the IDE reinvented for AI, is coming soon.",
       "publisher": { "@id": "https://opentide.ai/#org" },
       "inLanguage": "en"
     },
@@ -59,7 +60,13 @@
       "name": "OpenTide",
       "url": "https://opentide.ai/#opentide",
       "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "macOS, Linux, Windows",
+      "operatingSystem": "macOS, Linux",
+      "softwareVersion": "0.1",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "downloadUrl": "https://github.com/opentideai/opentide/releases/latest",
+      "installUrl": "https://github.com/opentideai/opentide#quick-start",
+      "sameAs": "https://github.com/opentideai/opentide",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "description": "The agent-native web framework. AI agents change a live, running app through gated MCP tools; every change is a typed mutation, verified before it commits and kept in an append-only log.",
       "programmingLanguage": "TypeScript",
       "publisher": { "@id": "https://opentide.ai/#org" }
@@ -151,7 +158,7 @@ p{margin:0}
 .pair .d{font-size:15px;color:#9FB2D6;line-height:1.4}
 .pair .arr{margin-left:auto;color:#86CBEA;font-size:20px}
 
-.hero-form{margin-top:34px;max-width:520px}
+.hero-cta{margin-top:34px;max-width:620px;display:flex;flex-direction:column;gap:14px}
 
 /* sea layers at the bottom of the hero */
 .sea{position:relative;z-index:1;margin-top:64px;height:180px}
@@ -167,19 +174,33 @@ p{margin:0}
 .window .bar span{margin-left:10px;font-family:var(--mono);font-size:12px;color:#6A7797}
 @media (max-width:520px){.shot-band{margin-top:-70px}.sea{height:120px}}
 
-/* ---------- Signup form ---------- */
-.signup{display:flex;gap:8px;padding:6px;border-radius:999px;background:#fff;box-shadow:0 10px 30px -12px rgba(0,0,0,.4)}
-.signup input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:16px;color:#0D1F52;padding:10px 16px;border-radius:999px}
-.signup input::placeholder{color:#7C88A6}
-.signup input:focus{outline:none}
-.signup:focus-within{box-shadow:0 0 0 3px rgba(242,163,58,.55),0 10px 30px -12px rgba(0,0,0,.4)}
-.signup button{border:0;font:inherit;font-weight:600;font-size:15.5px;background:var(--navy);color:#fff;padding:10px 20px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:background .2s}
-.signup button:hover{background:var(--ocean)}
-.signup button[disabled]{opacity:.6;cursor:progress}
-.form-note{margin-top:12px;font-size:14px;color:#9FB2D6;min-height:1.5em}
-.form-note.ok{color:#9BE3BF}
-.form-note.err{color:#FFB4A1}
-@media (max-width:420px){.signup{flex-direction:column;border-radius:18px}.signup button{padding:12px}}
+/* ---------- Install + buttons ---------- */
+.install{display:flex;align-items:center;gap:10px;border-radius:14px;padding:6px 6px 6px 16px;background:rgba(134,203,234,.08);border:1px solid rgba(134,203,234,.22);font-family:var(--mono);font-size:13.5px;color:#E6F4FA}
+.install code{flex:1;min-width:0;overflow-x:auto;white-space:nowrap;padding-block:8px;scrollbar-width:none}
+.install code::-webkit-scrollbar{display:none}
+.install code .pr{color:var(--amber);user-select:none;margin-right:10px}
+.install button{flex:none;font:inherit;font-size:12.5px;font-weight:500;color:#081230;background:#86CBEA;border:0;border-radius:9px;padding:8px 12px;cursor:pointer}
+.install button:hover{background:#A9DBF1}
+.install.light{background:var(--deep);border-color:var(--deep)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15.5px;padding:11px 18px;border-radius:999px;transition:background .2s,border-color .2s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.primary{background:var(--amber);color:#0D1F52}
+.btn.primary:hover{background:#F7B85C}
+.btn.ghost{color:#E6F4FA;border:1px solid rgba(134,203,234,.35)}
+.btn.ghost:hover{border-color:#86CBEA;background:rgba(134,203,234,.08)}
+.btn.ink{background:var(--navy);color:#fff}
+.btn.ink:hover{background:var(--ocean)}
+.btn.line{color:var(--ink);border:1px solid var(--line)}
+.btn.line:hover{border-color:var(--accent)}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:8px;font-weight:500}
+.chip.is-live{background:rgba(111,224,166,.16);color:#8EE8B8}
+.chip.is-soon{background:rgba(242,163,58,.16);color:#F7C47A}
+.get{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px}
+.get h3{font-size:20px;font-weight:600;margin-bottom:4px}
+.get p{color:var(--ink-2);font-size:15.5px}
+.get .install{grid-column:1/-1}
+@media (max-width:700px){.get{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- Sections ---------- */
 section.block{padding-block:72px 40px}
@@ -291,33 +312,33 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
       <div class="nav-links">
         <a href="#opentide">OpenTide</a>
         <a href="#tide">Tide</a>
-        <a class="pill" href="#notify">Get notified</a>
+        <a href="#get-started">Get started</a>
+        <a class="pill" href="https://github.com/opentideai/opentide" target="_blank" rel="noopener">GitHub</a>
       </div>
     </nav>
 
     <div class="hero-inner">
       <div>
-        <div class="status eyebrow"><span class="dot" aria-hidden="true"></span>Coming soon</div>
+        <div class="status eyebrow"><span class="dot" aria-hidden="true"></span>OpenTide 0.1 is out · open source</div>
         <h1>Build apps with AI agents, <em>one verified change</em> at a time.</h1>
-        <p class="lede"><b>OpenTide</b> is the agent-native web framework. <b>Tide</b> is the IDE reinvented for AI, built on top of it. Agents work on your live, running app through gated tools, and every change is checked before it commits. Tide and OpenTide support TypeScript. Python support is coming next.</p>
-        <div class="hero-form">
-          <form class="signup" data-signup novalidate>
-            <label for="email-hero" class="sr" style="position:absolute;left:-9999px">Email address</label>
-            <input id="email-hero" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
-            <button type="submit">Notify me</button>
-          </form>
-          <p class="form-note" aria-live="polite">One email when we launch. No spam.</p>
+        <p class="lede"><b>OpenTide</b> is the agent-native web framework, open source and available now. Connect the coding agent you already use and it works on your live, running app through gated tools, with every change checked before it commits. <b>Tide</b>, the IDE reinvented for AI, is built on top of it and coming soon. TypeScript today, Python support coming next.</p>
+        <div class="hero-cta">
+          <div class="install"><code id="cmd-hero"><span class="pr">$</span>curl -fsSL https://github.com/opentideai/opentide/releases/latest/download/install.sh | sh</code><button type="button" data-copy="cmd-hero">Copy</button></div>
+          <div class="btns">
+            <a class="btn primary" href="https://github.com/opentideai/opentide" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+            <a class="btn ghost" href="https://github.com/opentideai/opentide#quick-start" target="_blank" rel="noopener">Quick start</a>
+          </div>
         </div>
       </div>
       <div class="pair">
         <a href="#opentide">
           <img src="img/opentide-mark.svg" alt="OpenTide logo" width="56" height="56" />
-          <div><div class="n"><span>Open</span>Tide</div><div class="d">The agent-native web framework</div></div>
+          <div><div class="n"><span>Open</span>Tide</div><div class="d">The agent-native web framework<span class="chip is-live">Available</span></div></div>
           <span class="arr" aria-hidden="true">↓</span>
         </a>
         <a href="#tide">
           <img src="img/tide-mark.svg" alt="Tide logo" width="56" height="56" />
-          <div><div class="n">Tide</div><div class="d">The IDE reinvented for AI</div></div>
+          <div><div class="n">Tide</div><div class="d">The IDE reinvented for AI<span class="chip is-soon">Soon</span></div></div>
           <span class="arr" aria-hidden="true">↓</span>
         </a>
       </div>
@@ -362,12 +383,12 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
 
       <div class="features">
         <div class="feature"><h3><span class="glyph">01</span>Gated access</h3><p>Your code lives as a semantic graph, exposed to agents through MCP tools. Agents query exactly the nodes they need, and the OpenTide kernel decides what a valid change looks like, not the prompt.</p></div>
-        <div class="feature"><h3><span class="glyph">02</span>The running app is the source</h3><p>No code files to generate or keep in sync during development. The live process is the canonical artifact, persisted with state snapshots. When you ship, export it as a Deno app, a Node app, a standalone binary or a Docker image.</p></div>
+        <div class="feature"><h3><span class="glyph">02</span>The running app is the source</h3><p>No code files to generate or keep in sync during development. The live process is the canonical artifact, persisted with state snapshots. When you ship, one command exports a plain Node app you can deploy anywhere Node runs.</p></div>
         <div class="feature"><h3><span class="glyph">03</span>Typed mutations</h3><p>The graph is typed. Every edit lands as a serializable mutation to it, like <code>AddNode</code> or <code>ReplaceBody</code>, written to an append-only log. Because mutations are plain data, you can inspect, diff and replay them, and every entity carries its own revision number.</p></div>
         <div class="feature"><h3><span class="glyph">04</span>Verified before commit</h3><p>Each mutation is checked for well-formedness, graph consistency, effect constraints and contracts, then forked, verified and committed atomically. The kernel mints tamper-resistant evidence for every check, and a change with stale or missing evidence can’t close.</p></div>
         <div class="feature"><h3><span class="glyph">05</span>History you can roll back</h3><p>The log event-sources how the app evolved. Inspect any change, see why it was made, and roll it back. Changes are grouped into changesets tied to the agent turn that made them, and snapshots restore the whole app to any saved point.</p></div>
         <div class="feature"><h3><span class="glyph">06</span>Token-efficient</h3><p>Agents work on precise app entities instead of reading whole codebases, so the context window goes to the task. Tools return structured answers, like a route’s handler, a table’s columns or a function’s callers, instead of raw file dumps.</p></div>
-        <div class="feature"><h3><span class="glyph">07</span>Bring your own agent</h3><p>OpenTide runs as an MCP server. Point Claude Code, Codex or Cursor at your project over stdio or HTTP, and they get the same governed tools as the IDE.</p></div>
+        <div class="feature"><h3><span class="glyph">07</span>Bring your own agent</h3><p>OpenTide runs as an MCP server. Point Claude Code, Codex, Cursor, Windsurf or any MCP client at your project, and it gets 109 governed tools.</p></div>
         <div class="feature"><h3><span class="glyph">08</span>Live changes, no restarts</h3><p>Agent edits land in the running kernel, get recompiled and re-served immediately. You iterate on the running app, not a source tree.</p></div>
         <div class="feature"><h3><span class="glyph">09</span>Headless and model-neutral</h3><p><code>opentide serve</code>, <code>mcp</code>, <code>scaffold</code>, <code>build</code> and <code>export</code> from the terminal. The core runs without an LLM key and without a login.</p></div>
       </div>
@@ -400,7 +421,18 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
       </div>
 
       <div class="stack"><b>Built with</b><span>Deno</span><span>TypeScript</span><span>Hono</span><span>PGlite</span><span>Postgres</span><span>MCP</span></div>
-      <div class="stack" style="margin-top:10px"><b>Exports to</b><span>Deno app</span><span>Node app</span><span>Standalone binary</span><span>Docker image</span></div>
+      <div class="stack" style="margin-top:10px"><b>Exports to</b><span>Node app</span><b style="margin-left:14px">License</b><span>Apache-2.0</span><b style="margin-left:14px">Runs on</b><span>macOS</span><span>Linux</span><span>Windows (WSL)</span></div>
+      <div class="get">
+        <div>
+          <h3>Try OpenTide</h3>
+          <p>Install it, scaffold an app, and point your agent at it. The installer brings its own runtime; you only need <code style="font-family:var(--mono);font-size:.9em">curl</code>.</p>
+        </div>
+        <div class="btns">
+          <a class="btn ink" href="https://github.com/opentideai/opentide" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+          <a class="btn line" href="https://github.com/opentideai/opentide#quick-start" target="_blank" rel="noopener">Quick start</a>
+        </div>
+        <div class="install light"><code id="cmd-ot"><span class="pr">$</span>curl -fsSL https://github.com/opentideai/opentide/releases/latest/download/install.sh | sh</code><button type="button" data-copy="cmd-ot">Copy</button></div>
+      </div>
       <div class="divider"></div>
     </div>
   </section>
@@ -411,7 +443,7 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
       <div class="block-head">
         <img src="img/tide-mark.svg" alt="Tide logo" width="84" height="84" />
         <div>
-          <div class="eyebrow">The IDE</div>
+          <div class="eyebrow">The IDE · Coming soon</div>
           <h2 id="tide-h">Tide</h2>
           <p class="tag">The IDE reinvented for AI.</p>
         </div>
@@ -444,21 +476,20 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
     </div>
   </section>
 
-  <!-- ================= Coming soon ================= -->
-  <section class="soon" id="notify" aria-labelledby="soon-h">
+  <!-- ================= Get started ================= -->
+  <section class="soon" id="get-started" aria-labelledby="soon-h">
     <div class="wrap">
       <div>
-        <div class="eyebrow">Coming soon</div>
-        <h2 id="soon-h">The tide is coming in.</h2>
-        <p>OpenTide and Tide are in active development. Leave your email and we'll let you know when the first release is out.</p>
+        <div class="eyebrow">Open source · Apache-2.0</div>
+        <h2 id="soon-h">The tide is in.</h2>
+        <p>OpenTide 0.1 is out. Install it, connect the coding agent you already use, and build something real. Tide, the IDE, is coming soon.</p>
       </div>
-      <div>
-        <form class="signup" data-signup novalidate>
-          <label for="email-soon" style="position:absolute;left:-9999px">Email address</label>
-          <input id="email-soon" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
-          <button type="submit">Notify me</button>
-        </form>
-        <p class="form-note" aria-live="polite">One email when we launch. No spam.</p>
+      <div class="hero-cta" style="margin-top:0">
+        <div class="install"><code id="cmd-end"><span class="pr">$</span>curl -fsSL https://github.com/opentideai/opentide/releases/latest/download/install.sh | sh</code><button type="button" data-copy="cmd-end">Copy</button></div>
+        <div class="btns">
+          <a class="btn primary" href="https://github.com/opentideai/opentide" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+          <a class="btn ghost" href="https://github.com/opentideai/opentide/issues" target="_blank" rel="noopener">Report an issue</a>
+        </div>
       </div>
     </div>
     <div class="sea2" aria-hidden="true">
@@ -477,7 +508,8 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
     <div class="links">
       <a href="#opentide">OpenTide</a>
       <a href="#tide">Tide</a>
-      <a href="#notify">Get notified</a>
+      <a href="#get-started">Get started</a>
+      <a href="https://github.com/opentideai/opentide" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </footer>
@@ -488,31 +520,15 @@ footer .links{display:flex;gap:22px;flex-wrap:wrap}
 </div>
 
 <script>
-/* ---- Mailing list ----
-   Emails are stored as responses to a Google Form (linked Sheet optional).
-   SIGNUP_FIELD is the form's "Email" question id (entry.NNN). */
-var SIGNUP_ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSee9nIC0jpcaC4yDqkaunO5GGHHb39ntS5U6e--2d6gVWwpMw/formResponse';
-var SIGNUP_FIELD = 'entry.694557881';
-
+/* ---- Copy install command ---- */
 (function(){
-  var re=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  document.querySelectorAll('form[data-signup]').forEach(function(form){
-    var input=form.querySelector('input'), btn=form.querySelector('button'), note=form.parentNode.querySelector('.form-note');
-    form.addEventListener('submit',function(e){
-      e.preventDefault();
-      var email=(input.value||'').trim();
-      note.className='form-note';
-      if(!re.test(email)){note.classList.add('err');note.textContent='That email address doesn’t look right. Check it and try again.';input.focus();return;}
-      if(!SIGNUP_ENDPOINT){note.classList.add('err');note.textContent='Signups open when the site goes live. Check back soon.';return;}
-      btn.disabled=true;btn.textContent='Adding…';
-      var body=new URLSearchParams();body.append(SIGNUP_FIELD,email);
-      fetch(SIGNUP_ENDPOINT,{method:'POST',body:body,mode:'no-cors'}).then(function(){
-        note.classList.add('ok');note.textContent='You’re on the list. We’ll email '+email+' when we launch.';
-        input.value='';btn.textContent='Subscribed';
-      }).catch(function(){
-        note.classList.add('err');note.textContent='We couldn’t reach the signup service. Try again in a moment.';
-        btn.disabled=false;btn.textContent='Notify me';
-      });
+  document.querySelectorAll('button[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      var text=el.textContent.replace(/^\$/,'').trim();
+      function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1600)}
+      function select(){var r=document.createRange();r.selectNodeContents(el);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);btn.textContent='Press \u2318C'}
+      try{navigator.clipboard.writeText(text).then(done,select)}catch(e){select()}
     });
   });
 })();
