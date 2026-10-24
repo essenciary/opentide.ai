@@ -7,7 +7,7 @@ head='''<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>OpenTide &amp; Tide · The agent-native web framework and IDE</title>
+<title>OpenTide · Make your agent ship production-ready apps</title>
 <meta name="description" content="OpenTide is the agent-native web framework: your app runs live, AI agents change it through gated MCP tools, and every change is verified before it commits. Open source (Apache-2.0); connect Claude Code, Codex, Cursor or any MCP agent. Tide, the IDE reinvented for AI, is coming soon." />
 <meta name="keywords" content="OpenTide, Tide, AI agents, web framework, AI IDE, MCP, Model Context Protocol, TypeScript, agentic coding, verified code changes" />
 <meta name="author" content="Adrian Salceanu" />
@@ -17,18 +17,18 @@ head='''<!doctype html>
 <meta property="og:site_name" content="OpenTide" />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:url" content="https://opentide.ai/" />
-<meta property="og:title" content="OpenTide · The agent-native web framework" />
-<meta property="og:description" content="Build apps with AI agents, one verified change at a time. OpenTide, the agent-native web framework, is out and open source. Tide, the IDE, is coming soon." />
+<meta property="og:title" content="OpenTide · Make your agent ship production-ready apps" />
+<meta property="og:description" content="Fewer bugs. Fewer review rounds. Fewer tokens. OpenTide is the agent-native web framework: connect the coding agent you already use, and nothing counts as done until the server has run the tests that prove it. Open source. Tide, the IDE, is coming soon." />
 <meta property="og:image" content="https://opentide.ai/img/og.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
+<meta property="og:image:alt" content="OpenTide: Make your agent ship production-ready apps. Fewer bugs. Fewer review rounds. Fewer tokens." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="OpenTide · The agent-native web framework" />
-<meta name="twitter:description" content="Build apps with AI agents, one verified change at a time. OpenTide, the agent-native web framework, is out and open source. Tide, the IDE, is coming soon." />
+<meta name="twitter:title" content="OpenTide · Make your agent ship production-ready apps" />
+<meta name="twitter:description" content="Fewer bugs. Fewer review rounds. Fewer tokens. OpenTide is the agent-native web framework: connect the coding agent you already use, and nothing counts as done until the server has run the tests that prove it. Open source. Tide, the IDE, is coming soon." />
 <meta name="twitter:image" content="https://opentide.ai/img/og.png" />
-<meta name="twitter:image:alt" content="OpenTide: Build apps with AI agents, one verified change at a time." />
+<meta name="twitter:image:alt" content="OpenTide: Make your agent ship production-ready apps. Fewer bugs. Fewer review rounds. Fewer tokens." />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
@@ -105,9 +105,9 @@ og=f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox
 <path d="M0 534 C 200 520, 360 510, 560 516 C 760 522, 900 542, 1200 530 L1200 630 L0 630Z" fill="#0D1F52"/>
 <g transform="translate(80,90) scale(0.62)">{inner}</g>
 <text x="232" y="170" font-family="Familjen Grotesk" font-size="64" fill="#fff"><tspan font-weight="400">Open</tspan><tspan font-weight="600">Tide</tspan></text>
-<text x="80" y="300" font-family="Familjen Grotesk" font-weight="600" font-size="58" fill="#fff" letter-spacing="-1.5">Build apps with AI agents,</text>
-<text x="80" y="368" font-family="Familjen Grotesk" font-weight="600" font-size="58" fill="#86CBEA" letter-spacing="-1.5">one verified change at a time.</text>
-<text x="80" y="420" font-family="Familjen Grotesk" font-size="26" fill="#B8C8E2">OpenTide 0.1 · Open source · github.com/opentideai/opentide</text>
+<text x="80" y="300" font-family="Familjen Grotesk" font-weight="600" font-size="58" fill="#fff" letter-spacing="-1.5">Make your agent ship</text>
+<text x="80" y="368" font-family="Familjen Grotesk" font-weight="600" font-size="58" fill="#86CBEA" letter-spacing="-1.5">production-ready apps.</text>
+<text x="80" y="420" font-family="Familjen Grotesk" font-weight="600" font-size="30" fill="#E6F4FA">Fewer bugs. Fewer review rounds. Fewer tokens.</text>
 </svg>'''
 cairosvg.svg2png(bytestring=og.encode(),write_to='img/og.png')
 open('CNAME','w').write('opentide.ai\n')
