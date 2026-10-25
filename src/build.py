@@ -65,7 +65,6 @@ head='''<!doctype html>
       "url": "https://opentide.ai/#opentide",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "macOS, Linux",
-      "softwareVersion": "0.1",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "downloadUrl": "https://github.com/opentideai/opentide/releases/latest",
       "installUrl": "https://github.com/opentideai/opentide#quick-start",
